@@ -26,12 +26,13 @@ jobs:
         run: docker run --rm -v "$PWD":/home/source app-build-r-arm8
       - name: list files fuck
         run: |
-          ls -la /home/source
-          ls -la /home/source/app/build
-          ls -la /home/source/app/build/outputs/apk/
-          ls -la /home/source/app/build/outputs/apk/arm64_v8a
-          ls -la /home/source/app/build/outputs/apk/arm64_v8a/release
-          ls -la /home/source/app/build/outputs/apk/arm64_v8a/release/app.apk
+          ls -la .
+#          ls -la /home/source
+#          ls -la /home/source/app/build
+#          ls -la /home/source/app/build/outputs/apk/
+#          ls -la /home/source/app/build/outputs/apk/arm64_v8a
+#          ls -la /home/source/app/build/outputs/apk/arm64_v8a/release
+#          ls -la /home/source/app/build/outputs/apk/arm64_v8a/release/app.apk
       - name: release
         uses: actions/create-release@v1
         id: create_release
