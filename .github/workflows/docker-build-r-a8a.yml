@@ -1,0 +1,45 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build_release:
+    name: build_release
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: build
+        run: make build
+      - name: build docker
+        run: docker build -t app-build-r-arm7 -f Dockerfile_r_arm7 .
+      - name: build app
+        run: docker run --rm -v "$PWD":/home/source app-build-r-arm7
+      - name: release
+        uses: actions/create-release@v1
+        id: create_release
+        with:
+          draft: false
+          prerelease: false
+          release_name: $RNAME
+          tag_name: ${{ github.ref }}
+          body_path: CHANGELOG.md
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          RNAME: New release 123
+          TNAME: noshit_1.2.3_release1
+      - name: upload apk artifacts
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: /home/source/app/build/outputs/apk/arm64_v8a/release/app.apk
+          asset_name: test-app-arm7.apk
+          asset_content_type: application/gzip
