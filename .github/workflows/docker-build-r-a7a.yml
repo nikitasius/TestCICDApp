@@ -1,4 +1,4 @@
-name: Docker Image CI arm8
+name: Docker Image CI arm7
 
 on:
   push:
@@ -21,9 +21,9 @@ jobs:
       #              echo "::set-output tname=noshit_1.2.3_release1"
       #        id: data_release
       - name: build docker
-        run: docker build -t app-build-r-arm8 -f Dockerfile_r_arm8 .
+        run: docker build -t app-build-r-arm7 -f Dockerfile_r_arm7 .
       - name: build app
-        run: docker run --rm -v "$PWD":/home/source app-build-r-arm8
+        run: docker run --rm -v "$PWD":/home/source app-build-r-arm7
       - name: release
         uses: actions/create-release@v1
         id: create_release
@@ -41,6 +41,6 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./app/build/outputs/apk/arm64_v8a/release/app.apk
-          asset_name: test-app-arm8.apk
+          asset_path: ./app/build/outputs/apk/armeabi_v7a/release/app.apk
+          asset_name: test-app-arm7.apk
           asset_content_type: application/gzip
