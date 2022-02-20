@@ -3,12 +3,14 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    compileSdk 31
+    buildToolsVersion '31.0.0'
+    ndkVersion "21.4.7075529"
 
     defaultConfig {
         applicationId "com.example.myapplication"
         minSdk 23
-        targetSdk 32
+        targetSdk 31
         versionCode 1
         versionName "1.0"
 
@@ -17,7 +19,7 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
