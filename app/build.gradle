@@ -29,7 +29,7 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
-        coreLibraryDesugaringEnabled true
+//        coreLibraryDesugaringEnabled true
     }
     buildFeatures {
         viewBinding true
@@ -62,13 +62,6 @@ android {
         variant.outputs.all { output ->
             outputFileName = String.format("TestApp.%s.%s.apk", appv, variant.getFlavorName())
             output.versionCodeOverride = defaultConfig.versionCode * 10 + variant.productFlavors.get(0).abiVersionCode
-        }
-    }
-
-    variantFilter { variant ->
-        def names = variant.flavors*.name
-        if (variant.buildType.name != "release" && !names.contains("afat")) {
-            setIgnore(true)
         }
     }
 
