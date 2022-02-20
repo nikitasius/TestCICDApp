@@ -15,11 +15,11 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - name: release data
-        run: |
-              echo "::set-output rname=New release 123"
-              echo "::set-output tname=noshit_1.2.3_release1"
-        id: data_release
+#      - name: release data
+#        run: |
+#              echo "::set-output rname=New release 123"
+#              echo "::set-output tname=noshit_1.2.3_release1"
+#        id: data_release
       - name: build docker
         run: docker build -t app-build-r-arm8 -f Dockerfile_r_arm8 .
       - name: build app
@@ -30,8 +30,9 @@ jobs:
         with:
           draft: false
           prerelease: false
-          release_name: ${{ steps.data_release.outputs.rname }}
-          tag_name: ${{ steps.data_release.outputs.tname }}
+          release_name: New release 123
+          tag_name: noshit_1.2.3_release1
+          body_path: README.md
         env:
           GITHUB_TOKEN: ${{ github.token }}
       - name: upload apk artifacts
