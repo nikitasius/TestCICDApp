@@ -1,8 +1,6 @@
 name: Docker Image CI arm64_v8a
 
 on:
-  push:
-    branches: [ master ]
   pull_request:
     branches: [ master ]
 
