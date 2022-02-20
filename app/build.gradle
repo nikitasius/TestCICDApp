@@ -56,12 +56,10 @@ android {
     }
 
     defaultConfig.versionCode = 2566
-    def appv = "8.5.4r1"
 
     applicationVariants.all { variant ->
         variant.outputs.all { output ->
-            outputFileName = String.format("TestApp.%s.%s.apk", appv, variant.getFlavorName())
-            output.versionCodeOverride = defaultConfig.versionCode * 10 + variant.productFlavors.get(0).abiVersionCode
+            outputFileName = "app.apk"
         }
     }
 
