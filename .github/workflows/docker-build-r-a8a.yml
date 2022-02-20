@@ -25,9 +25,8 @@ jobs:
         with:
           draft: false
           prerelease: false
-          release_name: $RNAME
-          tag_name: ${{ github.ref }}
-          body_path: CHANGELOG.md
+          release_name: ${{ RNAME }}
+          tag_name: ${{ TNAME }}
         env:
           GITHUB_TOKEN: ${{ github.token }}
           RNAME: New release 123
