@@ -18,9 +18,9 @@ jobs:
       - name: build
         run: make build
       - name: build docker
-        run: docker build -t app-build-r-arm7 -f Dockerfile_r_arm7 .
+        run: docker build -t app-build-r-arm8 -f Dockerfile_r_arm8 .
       - name: build app
-        run: docker run --rm -v "$PWD":/home/source app-build-r-arm7
+        run: docker run --rm -v "$PWD":/home/source app-build-r-arm8
       - name: release
         uses: actions/create-release@v1
         id: create_release
