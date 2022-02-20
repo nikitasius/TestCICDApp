@@ -3,6 +3,7 @@ name: Docker Image CI armeabi_v7a
 on:
   pull_request:
     branches: [ master ]
+    types: [opened, closed]
 
 jobs:
   build_release:
@@ -40,6 +41,6 @@ jobs:
           asset_content_type: application/gzip
     env:
       RNAME: New release 321
-      TNAME: noshit_1.2.3_r1_
+      TNAME: noshit_1.2.3_r2_
       ANAME: testApp
       AARCH: armeabi_v7a
