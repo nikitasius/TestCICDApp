@@ -16,8 +16,9 @@ jobs:
         with:
           fetch-depth: 0
       - name: release data
-      - run: echo "::set-output rname=New release 123"
-      - run: echo "::set-output tname=noshit_1.2.3_release1"
+        run: |
+              echo "::set-output rname=New release 123"
+              echo "::set-output tname=noshit_1.2.3_release1"
         id: data_release
       - name: build docker
         run: docker build -t app-build-r-arm8 -f Dockerfile_r_arm8 .
