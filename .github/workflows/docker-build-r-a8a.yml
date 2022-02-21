@@ -45,6 +45,6 @@ jobs:
           asset_content_type: application/gzip
     env:
       RNAME: New release 321
-      TNAME: noshit_1.2.3_r3_
+      TNAME: noshit_1.2.3_r4_
       ANAME: testApp
       AARCH: arm64_v8a
