@@ -18,6 +18,9 @@ jobs:
         run: docker build -t app-build-r-arm7 -f Dockerfile_r_arm7 .
       - name: build app
         run: docker run --rm -v "$PWD":/home/source app-build-r-arm7
+      - name: sha256 basic apk
+        run: echo "::set-output name=SHA256BASIC::$(sha256sum ./app/build/outputs/apk/${{ env.AARCH }}/release/app.apk)"
+        id: sha256_basic
       - name: release
         if: github.event.pull_request.merged
         uses: actions/create-release@v1
@@ -26,6 +29,7 @@ jobs:
           draft: false
           prerelease: false
           release_name: ${{ env.RNAME }}
+          body: ${{ env.ANAME }}${{ env.AARCH }}.apk `${{ steps.sha256_basic.outputs.SHA256BASIC }}`
           tag_name: ${{ env.TNAME }}${{ env.AARCH }}
         env:
           GITHUB_TOKEN: ${{ github.token }}
@@ -41,6 +45,6 @@ jobs:
           asset_content_type: application/gzip
     env:
       RNAME: New release 321
-      TNAME: noshit_1.2.3_r2_
+      TNAME: noshit_1.2.3_r3_
       ANAME: testApp
       AARCH: armeabi_v7a
