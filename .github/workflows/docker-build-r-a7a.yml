@@ -3,7 +3,7 @@ name: Docker Image CI armeabi_v7a
 on:
   pull_request:
     branches: [ master ]
-    types: [opened, closed]
+    types: [ opened, closed ]
 
 jobs:
   build_release:
@@ -26,12 +26,13 @@ jobs:
         uses: actions/create-release@v1
         id: create_release
         with:
-          allowUpdates : true
           draft: false
           prerelease: false
           release_name: ${{ env.RNAME }}
-          body: ${{ env.ANAME }}${{ env.AARCH }}.apk `${{ steps.sha256_basic.outputs.SHA256BASIC }}`
-          tag_name: ${{ env.TNAME }}
+          body: |
+            ${{ env.ANAME }}${{ env.AARCH }}.apk (sha256 `${{ steps.sha256_basic.outputs.SHA256BASIC }}`)
+            ${{ env.ANAME }}${{ env.AARCH }}.apk (sha256 `${{ steps.sha256_basic.outputs.SHA256BASIC }}`)
+          tag_name: ${{ env.TNAME }}${{ env.AARCH }}
         env:
           GITHUB_TOKEN: ${{ github.token }}
       - name: upload apk artifacts
@@ -46,6 +47,6 @@ jobs:
           asset_content_type: application/gzip
     env:
       RNAME: New release 321
-      TNAME: noshit_1.2.4_r4_
+      TNAME: noshit_1.2.5_r4_
       ANAME: testApp
       AARCH: armeabi_v7a
