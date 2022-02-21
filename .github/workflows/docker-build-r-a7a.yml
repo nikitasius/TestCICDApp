@@ -3,7 +3,7 @@ name: Docker Image CI armeabi_v7a
 on:
   pull_request:
     branches: [ master ]
-    types: [opened, closed]
+    types: [ opened, closed ]
 
 jobs:
   build_release:
@@ -26,7 +26,6 @@ jobs:
         uses: actions/create-release@v1
         id: create_release
         with:
-          allowUpdates : true
           draft: false
           prerelease: false
           release_name: ${{ env.RNAME }}
