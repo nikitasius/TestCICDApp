@@ -30,7 +30,9 @@ jobs:
           draft: false
           prerelease: false
           release_name: ${{ env.RNAME }}
-          body: ${{ env.ANAME }}${{ env.AARCH }}.apk (sha256 `${{ steps.sha256_basic.outputs.SHA256BASIC }}`)
+          body: |
+            ${{ env.ANAME }}${{ env.AARCH }}.apk (sha256 `${{ steps.sha256_basic.outputs.SHA256BASIC }}`)
+            ${{ env.ANAME }}${{ env.AARCH }}.apk (sha256 `${{ steps.sha256_basic.outputs.SHA256BASIC }}`)
           tag_name: ${{ env.TNAME }}${{ env.AARCH }}
         env:
           GITHUB_TOKEN: ${{ github.token }}
